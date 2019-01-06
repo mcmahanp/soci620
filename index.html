@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>SOCI 620: Quantitative Methods 2</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="/Users/mcmahanp/Work/courses/soci620/site/style.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">SOCI 620: Quantitative Methods 2</h1>
+</header>
+<p><em>Winter 2019, Leacock 721, Tuesdays and Thursdays 8:35am–9:55am</em></p>
+<table id="personnel">
+<tr>
+<td>
+<strong>Instructor</strong>
+</td>
+<td>
+Peter McMahan (<a href="mailto:peter.mcmahan@mcgill.ca">peter.mcmahan@mcgill.ca</a>; <a href="tel://(514)398-6839">(514)398-6839</a>)
+</td>
+</tr>
+<tr>
+<td>
+<strong>Office hours</strong>
+</td>
+<td>
+13:00–14:30 Thursdays, or by appointment<br>Leacock 727
+</td>
+</tr>
+<tr>
+<td>
+<strong>Syllabus</strong>
+</td>
+<td>
+<a href="http://mcmahanp.github.io/soci210" class="uri">http://mcmahanp.github.io/soci210</a>
+</td>
+</tr>
+</table>
+<h2 id="description">Description</h2>
+<p>As the second of two courses in the quantitative methods sequence, this class will introduce students to statistical techniques that extend and diverge from standard multivariate regression models. To this end, the course will have two main goals. First, students will become familiar with a range of quantitative methods common in social science research. Methodological topics will include generalized linear models for predicting categorical, ordered, and count data, multilevel/hierarchical linear models, and strategies for analyzing time-series and panel data. Students will learn to critically interpret these methods as they are used in the literature, and to utilize the methods for their own research.</p>
+<p>The second goal of the course will be to provide students with an overarching framework to understand the methods we discuss as well as techniques they may encounter elsewhere. Instruction will therefore focus on a probabilistic interpretation of statistical models through a Bayesian lens. In addition to fostering a strong understanding of statistical dependence and parameter covariance, this approach will unify the methods we cover and enable students to build interpretable, theory-driven models of their own.</p>
+<h2 id="requirements">Requirements</h2>
+<p>Students are expected to attend class, be familiar with the readings, engage in discussions (both in-class and online), complete weekly assignments, and prepare an independent research project.</p>
+<h3 id="class">Class</h3>
+<p>The scheduled classes for the course will be hybrid lectures, discussions, and lab sessions. It is vital that students attend class regularly, having completed the readings and prepared to engage with the topics covered.</p>
+<h3 id="open-work-space">Open work space</h3>
+<p>In addition to the scheduled classes, we will have an open work session each week (schedule to be determined based on students’ availability). It can be immensely beneficial to work together when learning new statistical and computational methods, and the open work space will provide a venue for students to ask each other questions and discuss problems as they come up in working through assignments and projects. Although I will be present at most of these sessions, there will be no prepared content or structured discussions. Attendance at these sessions is optional but <em>strongly</em> encouraged.</p>
+<h3 id="communication">Communication</h3>
+<p>We will be using the online discussion forum <a href="https://piazza.com/">Piazza</a> to manage communication for the course. Students will get an email invitation to create an account and gain access to the class forum. Questions about the assignments, logistics, and any other relevant issues should be posted through Piazza.</p>
+<h3 id="equipment-and-software">Equipment and software</h3>
+<p>We will be working with data and learning analysis and visualization in-class, so <strong>students must bring a laptop computer with them</strong>. Mobile devices such as tablets and phones, even with an external keyboard, will not be sufficient. If you do not have access to a laptop please talk to me as soon as possible so we can work out a way for you to participate.</p>
+<p>We will be using the <a href="https://www.r-project.org">R statistical language and software</a> for data processing, statistical estimation, and visualization in this class. It is recommended that students install the <a href="https://www.rstudio.com/products/rstudio/download/">RStudio graphical interface</a>, which I will be using for demonstration in class.</p>
+<h3 id="readings">Readings</h3>
+<p>We will use the textbook <em>Statistical Rethinking</em> by Richard McElreath for the course <span class="citation" data-cites="mcelreath_statistical_2016">(McElreath 2016)</span>. I have put the book on reserve at the McLennan library building, and it is available <a href="https://mcgill-on-worldcat-org.proxy3.library.mcgill.ca/oclc/920672225">for free online and as an ebook through the library website</a>.</p>
+<p>Sections from <em>Statistical Rethinking</em>, along with further required readings from the social science literature, are listed on the schedule below. I have tried to include a link to each of the readings, most of which will require you to be on the McGill campus network or to use the library’s <a href="https://www.mcgill.ca/library/services/connect/ezproxy-faq">proxy or VPN</a> for off-campus use. Please let me know if you are having trouble accessing any of the readings.</p>
+<h3 id="assignments">Assignments</h3>
+<p>There will be a short assignment due on most of the Thursdays of the semester (see the schedule for specific dates). These are intended to help you help you learn to use the methods we discuss in R and to give you practice in interpreting statistical models. Assignments should be turned in through MyCourses. Students can work together and consult one another on assignments, but each student should create their own, unique write-up for submission.</p>
+<h3 id="independent-research-project">Independent research project</h3>
+<p>Each student will finish an independent research project by the end of the semester. These projects will be empirical, scholarly analyses, including a source of data, a well formed research question, a motivated statistical analysis, and a thorough interpretation of the results. Ideally, the projects will be related to work students are doing outside of class—projects that represent a piece of a student’s broader research agenda are encouraged. The projects will be graded on the basis of four required assessments:</p>
+<ol type="1">
+<li><strong>Precis</strong> (Due February 21): This will be a short (no more than one page) description of the research project. It should include a specific research question, a brief description of the data that will be used, and an outline of the analytical strategy that will be employed. The purpose of the precis is to motivate the project and to establish its feasibility, not to perform any analyses or to answer any research questions.</li>
+<li><strong>Proposal</strong> (Due March 14): Based on the feedback received from the precis, the project proposal will give a more detailed account of the research project. A good proposal will give a thorough account of the data that is being used, including some preliminary summaries and analyses. It will also articulate the research question in terms of statistical models, and will specify those models formally.</li>
+<li><strong>Presentation</strong> (In class, April 9 and 11): Each student will give a ten-minute presentation of their final project in class. The presentation should describe your research question succinctly, give a detailed account of the statistical model(s) used, and clearly interpret the results in light of the research question.</li>
+<li><strong>Project write-up</strong> (Due April 11): The writeup for the final project will take the form of a formal scholarly paper. This should go into careful detail about the project, including a full description of the data, exposition and motivation of the statistical models used, a summary of the estimation of the model parameters, and a careful, thorough interpretation of the results. It should include tables and figures to illustrate your analysis.</li>
+</ol>
+<p>Each student should arrange a brief meeting with me early in the term to discuss ideas for their research project and the appropriateness for the course.</p>
+<h2 id="evaluation">Evaluation</h2>
+<p>The evaluation components for this course, and the dates they are set for, are non-negotiable. Regular absences will affect your ability to do well on assignments and the final project.</p>
+<table id="grading">
+<tr>
+<td>
+<strong>Assignments</strong>
+</td>
+<td>
+<em>due dates listed on schedule</em>
+</td>
+<td>
+50% of final grade
+</td>
+</tr>
+<tr>
+<td>
+<strong>Project precis</strong>
+</td>
+<td>
+February 19
+</td>
+<td>
+5% of final grade
+</td>
+</tr>
+<tr>
+<td>
+<strong>Project Proposal</strong>
+</td>
+<td>
+March 12
+</td>
+<td>
+10% of final grade
+</td>
+</tr>
+<tr>
+<td>
+<strong>Project presentation</strong>
+</td>
+<td>
+February 19th
+</td>
+<td>
+10% of final grade
+</td>
+</tr>
+<tr>
+<td>
+<strong>Project writeup</strong>
+</td>
+<td>
+February 19th
+</td>
+<td>
+25% of final grade
+</td>
+</tr>
+</table>
+<h4 id="accessibility">Accessibility</h4>
+<p>I strive to make the classroom as accessible as possible and to accommodate the particular needs of individual students. Students with disabilities in need of accommodation please contact the Office for Students with Disabilities (<a href="http://www.mcgill.ca/osd/" class="uri">http://www.mcgill.ca/osd/</a>, phone <a href="tel://514-398-6009">514-398-6009</a>) to work out a plan for meeting the course requirements. Students are encouraged to contact me with any further issues they may have attending class or completing the work.</p>
+<h4 id="academic-integrity">Academic integrity</h4>
+<p>McGill University values academic integrity. Therefore, all students must understand the meaning and consequences of cheating, plagiarism and other academic offenses under the Code of Student Conduct and Disciplinary Procedures (see <a href="http://www.mcgill.ca/students/srr/honest/" class="uri">http://www.mcgill.ca/students/srr/honest/</a> for more information).(approved by Senate on 29 January 2003)</p>
+<p><em>L’université McGill attache une haute importance à l’honnêteté académique. Il incombe par conséquent à tous les étudiants de comprendre ce que l’on entend par tricherie, plagiat et autres infractions académiques, ainsi que les conséquences que peuvent avoir de telles actions, selon le Code de conduite de l’étudiant et des procédures disciplinaires (pour de plus amples renseignements, veuillez consulter le site <a href="http://www.mcgill.ca/students/srr/honest/" class="uri">http://www.mcgill.ca/students/srr/honest/</a>).</em></p>
+<h4 id="language-of-evaluation">Language of evaluation</h4>
+<p>In accord with McGill University’s Charter of Students’ Rights, students in this course have the right to submit in English or in French any written work that is to be graded. (approved by Senate on 21 January 2009)</p>
+<p><em>Conformément à la Charte des droits de l’étudiant de l’Université McGill, chaque étudiant a le droit de soumettre en français ou en anglais tout travail écrit devant être noté (sauf dans le cas des cours dont l’un des objets est la maîtrise d’une langue).</em></p>
+<h1 id="schedule">Schedule</h1>
+<p><em>Note: The topics and readings for this schedule are approximate, and are very likely to change. I will continue to adjust the items over the course of the term, so <strong>check back with the live version of the syllabus often</strong>.</em></p>
+<table id="schedule_table">
+<tr>
+<td class="weeknum">
+Week 1
+</td>
+<td class="lecturescell">
+<table class="lecturetable">
+<tr>
+<td class="lday">
+Tue
+</td>
+<td class="ldate">
+Jan 8
+</td>
+<td class="ltitle">
+Introductions, syllabus, thinking about probability
+</td>
+</tr>
+<tr>
+<td class="lday">
+Thu
+</td>
+<td class="ldate">
+Jan 10
+</td>
+<td class="ltitle">
+Probability models of social processes
+</td>
+</tr>
+</table>
+</td>
+<td class="required">
+<p>
+<strong>Textbook</strong>
+</p>
+<p>
+<a href="https://ebookcentral.proquest.com/lib/mcgill/reader.action?docID=4648054" target="_blank"><span class="citation" data-cites="mcelreath_statistical_2016">(McElreath 2016, Chs. 1 and 2)</span></a>
+</p>
+</td>
+<td class="optional">
+</td>
+<td class="due">
+</td>
+</tr>
+<tr>
+<td class="weeknum">
+Week 2
+</td>
+<td class="lecturescell">
+<table class="lecturetable">
+<tr>
+<td class="lday">
+Tue
+</td>
+<td class="ldate">
+Jan 15
+</td>
+<td class="ltitle">
+Bayesian models, likelihoods, and posterior distributions
+</td>
+</tr>
+<tr>
+<td class="lday">
+Thu
+</td>
+<td class="ldate">
+Jan 17
+</td>
+<td class="ltitle">
+Sampling from the posterior
+</td>
+</tr>
+</table>
+</td>
+<td class="required">
+<p>
+<strong>Textbook</strong>
+</p>
+<p>
+<a href="https://ebookcentral.proquest.com/lib/mcgill/reader.action?docID=4648054" target="_blank"><span class="citation" data-cites="mcelreath_statistical_2016">(McElreath 2016, Ch. 3)</span></a>
+</p>
+</td>
+<td class="optional">
+</td>
+<td class="due">
+<p>
+<strong>Due</strong>
+</p>
+<p>
+HW 1 (Thursday morning)
+</p>
+</td>
+</tr>
+<tr>
+<td class="weeknum">
+Week 3
+</td>
+<td class="lecturescell">
+<table class="lecturetable">
+<tr>
+<td class="lday">
+Tue
+</td>
+<td class="ldate">
+Jan 22
+</td>
+<td class="ltitle">
+Linear regressions from a Bayesian perspective
+</td>
+</tr>
+<tr>
+<td class="lday">
+Thu
+</td>
+<td class="ldate">
+Jan 24
+</td>
+<td class="ltitle">
+Interpreting Bayesian coefficient estimates
+</td>
+</tr>
+</table>
+</td>
+<td class="required">
+<p>
+<strong>Textbook</strong>
+</p>
+<p>
+<a href="https://ebookcentral.proquest.com/lib/mcgill/reader.action?docID=4648054" target="_blank"><span class="citation" data-cites="mcelreath_statistical_2016">(McElreath 2016, Chs. 4 and 5)</span></a>
+</p>
+</td>
+<td class="optional">
+</td>
+<td class="due">
+<p>
+<strong>Due</strong>
+</p>
+<p>
+HW 2 (Thursday morning)
+</p>
+</td>
+</tr>
+<tr>
+<td class="weeknum">
+Week 4
+</td>
+<td class="lecturescell">
+<table class="lecturetable">
+<tr>
+<td class="lday">
+Tue
+</td>
+<td class="ldate">
+Jan 29
+</td>
+<td class="ltitle">
+Checking models and estimates
+</td>
+</tr>
+<tr>
+<td class="lday">
+Thu
+</td>
+<td class="ldate">
+Jan 31
+</td>
+<td class="ltitle">
+Causation and interaction
+</td>
+</tr>
+</table>
+</td>
+<td class="required">
+<p>
+<strong>Textbook</strong>
+</p>
+<p>
+<a href="https://ebookcentral.proquest.com/lib/mcgill/reader.action?docID=4648054" target="_blank"><span class="citation" data-cites="mcelreath_statistical_2016">(McElreath 2016, Ch. 6)</span></a>
+</p>
+</td>
+<td class="optional">
+</td>
+<td class="due">
+<p>
+<strong>Due</strong>
+</p>
+<p>
+HW 3 (Thursday morning)
+</p>
+</td>
+</tr>
+<tr>
+<td class="weeknum">
+Week 5
+</td>
+<td class="lecturescell">
+<table class="lecturetable">
+<tr>
+<td class="lday">
+Tue
+</td>
+<td class="ldate">
+Feb 5
+</td>
+<td class="ltitle">
+Logistic regression: motivating latent-variable models
+</td>
+</tr>
+<tr>
+<td class="lday">
+Thu
+</td>
+<td class="ldate">
+Feb 7
+</td>
+<td class="ltitle">
+Logistic regression: methods and interpretation
+</td>
+</tr>
+</table>
+</td>
+<td class="required">
+<p>
+<strong>Textbook</strong>
+</p>
+<p>
+<a href="https://ebookcentral.proquest.com/lib/mcgill/reader.action?docID=4648054" target="_blank"><span class="citation" data-cites="mcelreath_statistical_2016">(McElreath 2016, Ch. 9 and Section 10.1)</span></a>
+</p>
+</td>
+<td class="optional">
+</td>
+<td class="due">
+<p>
+<strong>Due</strong>
+</p>
+<p>
+HW 4 (Thursday morning)
+</p>
+</td>
+</tr>
+<tr>
+<td class="weeknum">
+Week 6
+</td>
+<td class="lecturescell">
+<table class="lecturetable">
+<tr>
+<td class="lday">
+Tue
+</td>
+<td class="ldate">
+Feb 12
+</td>
+<td class="ltitle">
+Counts and rates
+</td>
+</tr>
+<tr>
+<td class="lday">
+Thu
+</td>
+<td class="ldate">
+Feb 14
+</td>
+<td class="ltitle">
+Poisson and negative binomial regressions
+</td>
+</tr>
+</table>
+</td>
+<td class="required">
+<p>
+<strong>Textbook</strong>
+</p>
+<p>
+<a href="https://ebookcentral.proquest.com/lib/mcgill/reader.action?docID=4648054" target="_blank"><span class="citation" data-cites="mcelreath_statistical_2016">(McElreath 2016, Ch. 10)</span></a>
+</p>
+</td>
+<td class="optional">
+</td>
+<td class="due">
+<p>
+<strong>Due</strong>
+</p>
+<p>
+HW 5 (Thursday morning)
+</p>
+</td>
+</tr>
+<tr>
+<td class="weeknum">
+Week 7
+</td>
+<td class="lecturescell">
+<table class="lecturetable">
+<tr>
+<td class="lday">
+Tue
+</td>
+<td class="ldate">
+Feb 19
+</td>
+<td class="ltitle">
+Multinomial regression
+</td>
+</tr>
+<tr>
+<td class="lday">
+Thu
+</td>
+<td class="ldate">
+Feb 21
+</td>
+<td class="ltitle">
+Ordered multinomial regression
+</td>
+</tr>
+</table>
+</td>
+<td class="required">
+<p>
+<strong>Textbook</strong>
+</p>
+<p>
+<a href="https://ebookcentral.proquest.com/lib/mcgill/reader.action?docID=4648054" target="_blank"><span class="citation" data-cites="mcelreath_statistical_2016">(McElreath 2016, Ch. 11)</span></a>
+</p>
+</td>
+<td class="optional">
+</td>
+<td class="due">
+<p>
+<strong>Due</strong>
+</p>
+<p>
+HW 6 (Thursday morning)
+</p>
+</td>
+</tr>
+<tr>
+<td class="weeknum">
+Week 8
+</td>
+<td class="lecturescell">
+<table class="lecturetable">
+<tr>
+<td class="lday">
+Tue
+</td>
+<td class="ldate">
+Feb 26
+</td>
+<td class="ltitle">
+Nested data and interdependence
+</td>
+</tr>
+<tr>
+<td class="lday">
+Thu
+</td>
+<td class="ldate">
+Feb 28
+</td>
+<td class="ltitle">
+Random intercept models
+</td>
+</tr>
+</table>
+</td>
+<td class="required">
+<p>
+<strong>Textbook</strong>
+</p>
+<p>
+<a href="https://ebookcentral.proquest.com/lib/mcgill/reader.action?docID=4648054" target="_blank"><span class="citation" data-cites="mcelreath_statistical_2016">(McElreath 2016, Ch. 12)</span></a>
+</p>
+</td>
+<td class="optional">
+</td>
+<td class="due">
+<p>
+<strong>Due</strong>
+</p>
+<p>
+HW 7 (Thursday morning)
+</p>
+</td>
+</tr>
+<tr>
+<td class="weeknum">
+Week 9
+</td>
+<td class="lecturescell">
+<table class="lecturetable">
+<tr>
+<td class="lday">
+Break!
+</td>
+<td class="ldate">
+</td>
+<td class="ltitle">
+No class!
+</td>
+</tr>
+</table>
+</td>
+<td class="required">
+</td>
+<td class="optional">
+</td>
+<td class="due">
+</td>
+</tr>
+<tr>
+<td class="weeknum">
+Week 10
+</td>
+<td class="lecturescell">
+<table class="lecturetable">
+<tr>
+<td class="lday">
+Tue
+</td>
+<td class="ldate">
+Mar 12
+</td>
+<td class="ltitle">
+Random slopes
+</td>
+</tr>
+<tr>
+<td class="lday">
+Thu
+</td>
+<td class="ldate">
+Mar 14
+</td>
+<td class="ltitle">
+Interpreting and visualizing multilevel estimates
+</td>
+</tr>
+</table>
+</td>
+<td class="required">
+<p>
+<strong>Textbook</strong>
+</p>
+<p>
+<a href="https://ebookcentral.proquest.com/lib/mcgill/reader.action?docID=4648054" target="_blank"><span class="citation" data-cites="mcelreath_statistical_2016">(McElreath 2016, Ch. 13)</span></a>
+</p>
+</td>
+<td class="optional">
+</td>
+<td class="due">
+<p>
+<strong>Due</strong>
+</p>
+<p>
+Final project precis (Thursday morning)
+</p>
+</td>
+</tr>
+<tr>
+<td class="weeknum">
+Week 11
+</td>
+<td class="lecturescell">
+<table class="lecturetable">
+<tr>
+<td class="lday">
+Tue
+</td>
+<td class="ldate">
+Mar 19
+</td>
+<td class="ltitle">
+Multilevel GLM
+</td>
+</tr>
+<tr>
+<td class="lday">
+Thu
+</td>
+<td class="ldate">
+Mar 21
+</td>
+<td class="ltitle">
+Covariance in random effects
+</td>
+</tr>
+</table>
+</td>
+<td class="required">
+</td>
+<td class="optional">
+</td>
+<td class="due">
+</td>
+</tr>
+<tr>
+<td class="weeknum">
+Week 12
+</td>
+<td class="lecturescell">
+<table class="lecturetable">
+<tr>
+<td class="lday">
+Tue
+</td>
+<td class="ldate">
+Mar 26
+</td>
+<td class="ltitle">
+Time series: nesting time within individuals
+</td>
+</tr>
+<tr>
+<td class="lday">
+Thu
+</td>
+<td class="ldate">
+Mar 28
+</td>
+<td class="ltitle">
+Missing data
+</td>
+</tr>
+</table>
+</td>
+<td class="required">
+<p>
+<strong>Textbook</strong>
+</p>
+<p>
+<a href="https://ebookcentral.proquest.com/lib/mcgill/reader.action?docID=4648054" target="_blank"><span class="citation" data-cites="mcelreath_statistical_2016">(McElreath 2016, Ch. 14)</span></a>
+</p>
+</td>
+<td class="optional">
+</td>
+<td class="due">
+<p>
+<strong>Due</strong>
+</p>
+<p>
+Final project proposal (Thursday morning)
+</p>
+</td>
+</tr>
+<tr>
+<td class="weeknum">
+Week 13
+</td>
+<td class="lecturescell">
+<table class="lecturetable">
+<tr>
+<td class="lday">
+Tue
+</td>
+<td class="ldate">
+Apr 2
+</td>
+<td class="ltitle">
+Three-level models
+</td>
+</tr>
+<tr>
+<td class="lday">
+Thu
+</td>
+<td class="ldate">
+Apr 4
+</td>
+<td class="ltitle">
+Non-nested models
+</td>
+</tr>
+</table>
+</td>
+<td class="required">
+</td>
+<td class="optional">
+</td>
+<td class="due">
+</td>
+</tr>
+<tr>
+<td class="weeknum">
+Week 14
+</td>
+<td class="lecturescell">
+<table class="lecturetable">
+<tr>
+<td class="lday">
+Tue
+</td>
+<td class="ldate">
+Apr 9
+</td>
+<td class="ltitle">
+Final project presentations
+</td>
+</tr>
+<tr>
+<td class="lday">
+Thu
+</td>
+<td class="ldate">
+Apr 11
+</td>
+<td class="ltitle">
+Final project presentations
+</td>
+</tr>
+</table>
+</td>
+<td class="required">
+</td>
+<td class="optional">
+</td>
+<td class="due">
+<p>
+<strong>Due</strong>
+</p>
+<p>
+Final project (Thursday morning)
+</p>
+</td>
+</tr>
+</table>
+<h1 id="references" class="unnumbered">References</h1>
+<div id="refs" class="references">
+<div id="ref-mcelreath_statistical_2016">
+<p>McElreath, Richard. 2016. <em>Statistical Rethinking : A Bayesian Course with Examples in R and Stan</em>.</p>
+</div>
+</div>
+</body>
+</html>
