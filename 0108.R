@@ -46,18 +46,20 @@ f <- alist(
   mu ~ dnorm( 0 , 20 ),
   sigma ~ dcauchy( 0 , 3 )
 )
-fit <- map( 
+# fit it using maximum a posteriori (MAP)
+fit_map <- map( 
   f , 
   data = list(y=obs) ,
   start=list(mu=0,sigma=1)
 )
-precis(fit)
+precis(fit_map)
 
 
 # and finally, test the map2stan() function
 # (this should tak a while to run, and will
 # probably throw some warnings and errors.
 # Don't worry about these for now)
+# This fits the same model as above, using MCMC instead of MAP
 fit_stan <- map2stan( 
   f , 
   data = list(y=obs)
@@ -65,6 +67,6 @@ fit_stan <- map2stan(
 precis(fit_stan)
 
 
-# precis(fit) and precis(fit_stan) should give almost identical results
-precis(fit)
+# precis(fit_map) and precis(fit_stan) should give almost identical results
+precis(fit_map)
 precis(fit_stan)
