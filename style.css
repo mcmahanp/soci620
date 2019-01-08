@@ -114,7 +114,7 @@ table#schedule_table {
 }
 
 table#schedule_table tr {
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid black !important;
     vertical-align: bottom;
 }
 table#schedule_table p {
@@ -184,6 +184,15 @@ table.lecturetable td.ldate {
     white-space: nowrap;
     padding-right: 8px !important;
     font-style: italic;
+}
+table.lecturetable td.llab {
+    text-align: left !important;
+    padding-left: 1em !important;
+}
+
+table.lecturetable td.llab:before {
+    content: "lab:";
+    font-weight: bold;
 }
 
 /* reference list */
