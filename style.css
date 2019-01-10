@@ -191,7 +191,7 @@ table.lecturetable td.llab {
 }
 
 table.lecturetable td.llab:before {
-    content: "lab:";
+    content: "code:";
     font-weight: bold;
 }
 
