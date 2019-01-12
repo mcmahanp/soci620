@@ -195,6 +195,26 @@ table.lecturetable td.llab:before {
     font-weight: bold;
 }
 
+/* source code */
+
+code.sourceCode {
+    font-family: Monaco, monospace;
+    font-size: 85%;
+}
+div.sourceCode {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+div.sourceCode a:after {
+    content: "";
+    display: inline-block;
+    background: none;
+    width: 7pt;
+    height: 12pt;
+    margin-left: 2px;
+}
+
+
 /* reference list */
 div.references {
     margin-left:30px;
