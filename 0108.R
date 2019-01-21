@@ -68,5 +68,5 @@ precis(fit_stan)
 
 
 # precis(fit_map) and precis(fit_stan) should give almost identical results
-precis(fit_map)
-precis(fit_stan)
+print(precis(fit_map))
+print(precis(fit_stan))
