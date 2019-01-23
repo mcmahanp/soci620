@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Assignment 2, SOCI 620, Winter 2019</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../style.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Assignment 2, SOCI 620, Winter 2019</h1>
+</header>
+<p><em>Due Mon, Jan 28</em></p>
+<p>In this assignment, you will be looking at income inequality in a cross-national perspective. The data for the assignment is available from <a href="https://mcmahanp.github.io/soci620/data/dev_and_col.csv" class="uri">https://mcmahanp.github.io/soci620/data/dev_and_col.csv</a>.</p>
+<ol start="0" type="1">
+<li>Load the data into R using the following commands. This data has a number of missing values, which we will ignore for the moment. The second line in the code below will remove any rows with missing values in the <code>latest_gini</code> and <code>colonized</code> columns. (A description of the variables and the data sources are listed at the bottom of this document).</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">d &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;https://mcmahanp.github.io/soci620/data/dev_and_col.csv&#39;</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">d &lt;-<span class="st"> </span>d[<span class="op">!</span><span class="kw">is.na</span>(d<span class="op">$</span>latest_gini) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(d<span class="op">$</span>colonized),]</a></code></pre></div>
+<ol type="1">
+<li><p>The Gini index is a measure of resource inequality in a population. A value of 0 would mean that each individual in the population has exactly the same amount of that resource, while a population in which one person had all of the resources would have a Gini value close to 100 (a Gini index of exactly 100 is impossible in a finite population). The variable <code>latest_gini</code> is the most recent World Bank’s estimate the country-level inequality in income.</p>
+<p>Create a density plot for <code>latest_gini</code> and describe what you observe.</p>
+<p>(<strong><em>1 point</em></strong>)</p></li>
+<li><p>Build a Gaussian model of income inequality that will estimate the average Gini index and the standard deviation in the Gini index across countries. Write out the full model, including all priors and any stochastic or deterministic relationships.</p>
+<p>Then, estimate the model using the <code>map()</code> function from the <code>rethinking</code> package. Describe the posterior distributions of the mean and standard deviation, including the mean of the marginal posteriors and 90% credible intervals. What do these mean in plain language?</p>
+<p>(<strong><em>2 points</em></strong>)</p></li>
+<li><p>The variable <code>colonized</code> contains an indicator of whether the country “was a dependency ruled by a foreign power before achieving independence” (quote from original codebook of Hensel, 2018). We want to see if there is a systematic difference in income inequality between former colonies and countries that were never colonized.</p>
+<p>Adapt your model from the last question to create a regression model allowing for different average inequalities for colonized versus never-colonized nations. Again, write out the full model, including all priors and any stochastic or deterministic relationships.</p>
+<p>Estimate this model using <code>map()</code>. Describe the posterior distributions the regression coefficients, including the mean of the marginal posteriors and 90% credible intervals. What do these mean in plain language?</p>
+<p>(<strong><em>2 points</em></strong>)</p></li>
+<li><p>Use the <code>extract.samples()</code> function to draw a few thousand samples from the joint posterior of the regression model you just estimated. Use the sample to recreate the posterior mean and 90% credible intervals from the previous question. Do they match up?</p>
+<p>Use the same sample to create a single figure comparing the posterior density of average inequality in for the two types of countries (former colonies and non-colonized countries). Do these posterior densities tell the same story as the results from the previous question?</p>
+<p>(<strong><em>2 points</em></strong>)</p></li>
+<li><p>Create another regression model using a variable of your choice from the data set (see variable descriptions below). The new model should include both <code>colonized</code> and your new choice of variable as predictors. Estimate the model using <code>map()</code>, and describe the marginal posterior distributions of your parameters. What does this expanded model tell you that the previous model did not?</p>
+<p>(<strong><em>3 points</em></strong>)</p>
+<p><em>Note: Several of the variables in the data set have missing values. You may need to exclude rows from the dataset that have a missing value (<code>NA</code>) in the covariate you choose. See step (0) above for one way to do this.</em></p></li>
+</ol>
+<h3 id="data-description">Data description</h3>
+<table>
+<colgroup>
+<col style="width: 41%" />
+<col style="width: 41%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Variable</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><code>country_name</code></td>
+<td style="text-align: left;">Name of country</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><code>country_code</code></td>
+<td style="text-align: left;">Three-letter country code</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><code>latest_gini</code></td>
+<td style="text-align: left;">Most recent World bank estimate of income inequality since 2010 (Gini index)</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><code>latest_gini_year</code></td>
+<td style="text-align: left;">Year of Gini index estimate</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><code>population_2015</code></td>
+<td style="text-align: left;">Total population (2015)</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><code>population_growth_2015</code></td>
+<td style="text-align: left;">Percent population growth (2015)</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><code>population_density_2015</code></td>
+<td style="text-align: left;">Population per sq. km (2015)</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><code>population_pct_urban_2015</code></td>
+<td style="text-align: left;">Percent urban pop. (2015)</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><code>population_pct_immigrant_2015</code></td>
+<td style="text-align: left;">Percent immigrant pop. (2015)</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><code>gdp_usd2010_2015</code></td>
+<td style="text-align: left;">GDP in 2010 USD (2015)</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><code>gdp_percap_usd2010_2015</code></td>
+<td style="text-align: left;">GDP per capita in 2010 USD (2015)</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><code>fertility_rate_2015</code></td>
+<td style="text-align: left;">Births per woman (2015)</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><code>independence_year</code></td>
+<td style="text-align: left;">Year of national independence</td>
+<td style="text-align: left;">ICOW</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><code>independece_from</code></td>
+<td style="text-align: left;">Country Independence won from</td>
+<td style="text-align: left;">ICOW</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><code>independence_violent</code></td>
+<td style="text-align: left;">Violent independence indicator</td>
+<td style="text-align: left;">ICOW</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><code>colonized</code></td>
+<td style="text-align: left;">Was colony before independence</td>
+<td style="text-align: left;">ICOW</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><code>primary_colonial_ruler</code></td>
+<td style="text-align: left;">Primary colonial ruler</td>
+<td style="text-align: left;">ICOW</td>
+</tr>
+</tbody>
+</table>
+<p>World Bank data from World Development Indicators database</p>
+<p>ICOW data from R. Hensel (2018). “ICOW Colonial History Data Set, version 1.1.” Available at <a href="http://www.paulhensel.org/icowcol.html" class="uri">http://www.paulhensel.org/icowcol.html</a>.</p>
+</body>
+</html>

@@ -63,6 +63,28 @@ li {
     margin-bottom: 10px;
 }
 
+
+/* generic table */
+table {
+    margin-left: 30px;
+    border-collapse: collapse;
+    text-align: right;
+}
+table tr{
+    border-bottom: 1.5px solid black;
+    vertical-align: bottom;
+}
+table td, table th {
+    padding-left: 30px;
+    padding-top: 5px;
+}
+table td:first-child, table th:first-child{
+    padding-left: 0px;
+    text-align: right;
+}
+
+
+
 /* personnel table */
 table#personnel {
     margin-left: 30px;
