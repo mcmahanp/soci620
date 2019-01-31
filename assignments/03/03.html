@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Assignment 3, SOCI 620, Winter 2019</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../style.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Assignment 3, SOCI 620, Winter 2019</h1>
+</header>
+<p><em>Due Mon, Feb 4</em></p>
+<p>For this assignment, you will be examining competing models to explain population growth. The data for the assignment are the same as assignment 2 and are available at <a href="https://mcmahanp.github.io/soci620/data/dev_and_col.csv" class="uri">https://mcmahanp.github.io/soci620/data/dev_and_col.csv</a>.</p>
+<ol start="0" type="1">
+<li>Load the data into R using the following commands. (A description of the variables and the data sources are listed at the bottom of this document).</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">d &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;https://mcmahanp.github.io/soci620/data/dev_and_col.csv&#39;</span>)</a></code></pre></div>
+<ol type="1">
+<li><p>The outcome variable you will be working with is <code>population_growth_2015</code>, a measure of year-to-year growth in population from 2014 to 2015. You will be considering three different explanatory variables: the fertility rate(<code>fertility_rate_2015</code>), the percent of the population that is foreign-born (<code>population_pct_immigrant_2015</code>), and the per-capita gross domestic product (GDP) <code>gdp_percap_usd2010_2015</code>.</p>
+<p>Because you will be comparing a number of models formally, you need to make sure they will all be using the same data. Use R’s <code>complete.cases()</code> function to find out which rows in the data have no missing values for any of the four variables listed above (rows with missing values for other variables should be retained). How many cases will you be dropping? Look at the names of the countries that will be dropped. Are there any obvious commonalities that might lead to biased analysis? Remove these incomplete cases from the data.</p>
+<p>(<strong><em>2 points</em></strong>)</p></li>
+<li><p>One obvious predictor for a country’s rate of population growth is the fertility rate. Use the <code>map()</code> function to estimate a linear regression predicting <em>standardized</em> population growth rate using the <em>standardized</em> fertility rate as the sole independent variable. What are the results (include estimates, a measure of uncertainty for the estimates, and an interpretation of the estimates for each coefficient)?</p>
+<p>Create a figure that overlays a scatter plot of the two variables with (a) a 90% credible interval for the posterior expected growth rate and (b) a 90% credible interval for the posterior predictive distribution. You can use the <code>link()</code>, <code>sim()</code>, and <code>shade()</code> functions from the <code>rethinking</code> package for this (but you do not need to).</p>
+<p>(<strong><em>4 points</em></strong>)</p></li>
+<li><p>Another major factor in the change in a country’s population is immigration. Our data does not have a measure of immigration rate by year, but it does have a measure of the total immigrant population. Use <em>standardized</em> percent immigrant population as an (imperfect) proxy for immigration rate, augment the regression from the previous step to account for both fertility and immigration as predictors. What are the results (include estimates, a measure of uncertainty for the estimates, and an interpretation of the estimates for each coefficient)?</p>
+<p>Use the <code>deviance()</code> function to compare the fit of the univariate model from the previous question and the bivariate model just completed. What does it tell you? Does it provide a reason to trust one model over the other? Then, use the <code>WAIC()</code> function to calculate the “widely applicable information criterion” (WAIC) for each of the two models. What does this measure tell you, and does it provide a reason to trust one model over the other? Pick one of the models (either the univariate model using just fertility to predict growth, or the bivariate model using both fertility and percent immigrant population to predict growth) and justify your decision.</p>
+<p>(<strong><em>5 points</em></strong>)</p></li>
+<li><p>Satisfied that you have picked the right model, you share your results with a few colleagues. One of them brings up that if you want to make a causal claim about population growth, you are missing an important confounder: GDP. For each predictor variable in the model you chose in the last question, determine whether GDP could be a confounder for the link between that predictor and population growth. (<em>Note: you can use <code>lm()</code> or <code>cor.test()</code> to test associations between variables if you prefer, rather than building and estimating a Bayesian model for each.</em>)</p>
+<p>(<strong><em>4 points</em></strong>)</p></li>
+<li><p>Regardless of your answer to the last question, build one final model that incorporates <em>standardized</em> per-capita GDP as an additional predictor in your model from question 3. Estimate this model and briefly describe the results.</p>
+<p>Use the <code>WAIC()</code> function to calculate the WAIC for this new model. Based on the result, which model would you use if you wanted to predict the growth rate for a country that was not included in our data? Which model would you use if you were trying to establish a causal link between fertility and population growth? Explain your answer to each of these.</p>
+<p>(<strong><em>5 points</em></strong>)</p></li>
+</ol>
+<h3 id="data-description">Data description</h3>
+<table>
+<colgroup>
+<col style="width: 41%" />
+<col style="width: 41%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Variable</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><code>country_name</code></td>
+<td style="text-align: left;">Name of country</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><code>country_code</code></td>
+<td style="text-align: left;">Three-letter country code</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><code>latest_gini</code></td>
+<td style="text-align: left;">Most recent World bank estimate of income inequality since 2010 (Gini index)</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><code>latest_gini_year</code></td>
+<td style="text-align: left;">Year of Gini index estimate</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><code>population_2015</code></td>
+<td style="text-align: left;">Total population (2015)</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><code>population_growth_2015</code></td>
+<td style="text-align: left;">Percent population growth (2015)</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><code>population_density_2015</code></td>
+<td style="text-align: left;">Population per sq. km (2015)</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><code>population_pct_urban_2015</code></td>
+<td style="text-align: left;">Percent urban pop. (2015)</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><code>population_pct_immigrant_2015</code></td>
+<td style="text-align: left;">Percent immigrant pop. (2015)</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><code>gdp_usd2010_2015</code></td>
+<td style="text-align: left;">GDP, 2010 USD (2015)</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><code>gdp_percap_usd2010_2015</code></td>
+<td style="text-align: left;">GDP per capita, 2010 USD (2015)</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><code>fertility_rate_2015</code></td>
+<td style="text-align: left;">Births per woman (2015)</td>
+<td style="text-align: left;">World Bank</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><code>independence_year</code></td>
+<td style="text-align: left;">Year of national independence</td>
+<td style="text-align: left;">ICOW</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><code>independece_from</code></td>
+<td style="text-align: left;">Country Independence won from</td>
+<td style="text-align: left;">ICOW</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><code>independence_violent</code></td>
+<td style="text-align: left;">Violent independence indicator</td>
+<td style="text-align: left;">ICOW</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><code>colonized</code></td>
+<td style="text-align: left;">Was colony before independence</td>
+<td style="text-align: left;">ICOW</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><code>primary_colonial_ruler</code></td>
+<td style="text-align: left;">Primary colonial ruler</td>
+<td style="text-align: left;">ICOW</td>
+</tr>
+</tbody>
+</table>
+<p>World Bank data from World Development Indicators database</p>
+<p>ICOW data from R. Hensel (2018). “ICOW Colonial History Data Set, version 1.1.” Available at <a href="http://www.paulhensel.org/icowcol.html" class="uri">http://www.paulhensel.org/icowcol.html</a>.</p>
+</body>
+</html>
