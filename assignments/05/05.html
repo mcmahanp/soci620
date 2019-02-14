@@ -95,10 +95,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>First, build standard Poisson model predicting days skipped by the student.</p>
 <ol class="incremental" type="a">
 <li><p>Construct two new variables:</p>
-<ul class="incremental">
-<li>one from <code>grade</code>, but centered at grade 10</li>
-<li>one from <code>gen_health</code> that takes a value of 1 if a student rated their health as ‘Excellent’ ,‘Very good’, or ‘Good’ and a value of 0 if they rated their health as ‘Fair’ or ‘Poor’.</li>
-</ul></li>
+<p>One by recentering <code>grade</code> around grade 10</p>
+<p>One from <code>gen_health</code> that takes a value of 1 if a student rated their health as ‘Excellent’ ,‘Very good’, or ‘Good’ and a value of 0 if they rated their health as ‘Fair’ or ‘Poor’. One way to make this variable would look something like:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">d<span class="op">$</span>h_ex &lt;-<span class="st"> </span>d<span class="op">$</span>gen_health <span class="op">==</span><span class="st"> &#39;Excellent&#39;</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">d<span class="op">$</span>h_vg &lt;-<span class="st"> </span>d<span class="op">$</span>gen_health <span class="op">==</span><span class="st"> &#39;Very good&#39;</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">d<span class="op">$</span>h_g &lt;-<span class="st"> </span>d<span class="op">$</span>gen_health <span class="op">==</span><span class="st"> &#39;Good&#39;</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">d<span class="op">$</span>health &lt;-<span class="st"> </span>d<span class="op">$</span>h_ex <span class="op">+</span><span class="st"> </span>d<span class="op">$</span>h_vg <span class="op">+</span><span class="st"> </span>d<span class="op">$</span>h_g</a></code></pre></div>
+<p>You can check whether your new variable is correctly coded by looking at a cross-tabulation of the old and new variable: <code>table(d$health,d$gen_health)</code>.</p></li>
 <li><p>Build and estimate a standard Poisson regression predicting days skipped, using centered grade level (constructed above), an indicator of good health (constructed above), family log income, and whether any parent receives public assistance (welfare) as predictors. You can use <code>map()</code> or <code>map2stan()</code> for the estimation.</p></li>
 <li><p>Interpret the results of the model using specific terms. Which students are more or less likely to skip? How much of a change is associated with each of the predictor variables?</p></li>
 <li><p>Construct a posterior predictive plot from this model and compare it to the empirical distribution of days skipped. Does it look like a good fit?</p></li>
