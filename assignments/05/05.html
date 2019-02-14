@@ -90,13 +90,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The data is online, and can be loaded using</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">d &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;https://mcmahanp.github.io/soci620/data/health_attendance.csv&#39;</span>)</a></code></pre></div>
 <p>The outcome variable is called <code>days_skipped</code>. The data also contains variables on the student’s overall health (<code>gen_health</code>), whether any parent is on social support or welfare (<code>par_welfare</code>), and whether any parent has a physical disability (<code>par_disabled</code>).</p></li>
-<li><p><strong>Build a Poisson model of days skipped.</strong></p>
+<li><p><strong>Build a Poisson model of days skipped. (<em>6 points</em>)</strong></p>
 <p>First, build standard Poisson model predicting days skipped by the student.</p>
 <ol class="incremental" type="a">
-<li><p>Construct two new variables: one from <code>grade</code>, but centered at grade 10, and one from <code>gen_health</code> that indicates if a student rated their health as ‘Excellent’ ,‘Very good’, or ‘Good’.</p></li>
-<li><p>Build and estimate a standard Poisson regression predicting days skipped, using centered grade level (constructed above), an indicator of good health (constructed above), family log income, and whether any parent receives public assistance as predictors. You can use <code>map()</code> or <code>map2stan()</code> for the estimation.</p></li>
-<li><p>Interpret the results of the model in specific terms.</p></li>
+<li><p>Construct two new variables:</p>
+<ul class="incremental">
+<li>one from <code>grade</code>, but centered at grade 10</li>
+<li>one from <code>gen_health</code> that takes a value of 1 if a student rated their health as ‘Excellent’ ,‘Very good’, or ‘Good’ and a value of 0 if they rated their health as ‘Fair’ or ‘Poor’.</li>
+</ul></li>
+<li><p>Build and estimate a standard Poisson regression predicting days skipped, using centered grade level (constructed above), an indicator of good health (constructed above), family log income, and whether any parent receives public assistance (welfare) as predictors. You can use <code>map()</code> or <code>map2stan()</code> for the estimation.</p></li>
+<li><p>Interpret the results of the model using specific terms. Which students are more or less likely to skip? How much of a change is associated with each of the predictor variables?</p></li>
 <li><p>Construct a posterior predictive plot from this model and compare it to the empirical distribution of days skipped. Does it look like a good fit?</p></li>
+</ol></li>
+<li><p><strong>Build an over-dispersed Poisson model. (<em>7 points</em>)</strong></p>
+<p>One reason a standard Poisson regression can go wrong is that the Poisson distribution is bad at accommodating unaccounted variation in the population. In this case, the restriction that the variance must be the same as the mean for any given type of student may be biasing our results. In this step, you will build a new model that allows more variation in your outcome variable than the standard Poisson by using a gamma-Poisson mixture.</p>
+<ol class="incremental" type="a">
+<li><p>Create and estimate a gamma-Poisson model of skipped days using the same covariates as above. You will want to use the <code>dgampois()</code> distribution in your model specification.</p></li>
+<li><p>Interpret the results of this new model. What is the estimate for the dispersion parameter? How do these estimates compare with the estimates from the standard Poisson distribution? Why might they differ?</p></li>
+<li><p>Make a posterior predictive plot for this new model and compare it to the empirical distribution. Does this look like a better fit than the standard Poisson regression?</p></li>
+</ol></li>
+<li><p><strong>Build a zero-inflated Poisson model. (<em>7 points</em>)</strong></p>
+<p>Another possible shortcoming of the standard Poisson regression is the potential for multiple ‘types’ of zero. Some students may not skip class because they never even considered it—they don’t think of themselves as the types of students who do that sort of thing. Other students may be comfortable skipping class, but just happened not to this school year. As a final step, you will model this situation using a zero-inflated Poisson model of days skipped.</p>
+<ol class="incremental" type="a">
+<li><p>Use the <code>dzipois()</code> function to specify a zero-inflated model. Use the same covariates as the previous two models for the prediction of the rate of classes skipped (<span class="math inline"><em>λ</em></span>). For the Binomial portion of the model that predicts whether or not a student is a “would never skip” type of student, pick your own covariates. These can be the same, different, or similar to the ones you have already used. Talk about why you modeled this the way that you did.</p></li>
+<li><p>Estimate this model (you may want to use <code>map()</code> rather thaan <code>map2stan()</code> here), and display the results. What type of student is more likely to never skip class? Of the students that might be willing to skip class, which are more likely to skip frequently?</p></li>
+<li><p>Make a posterior predictive plot for the zero-inflated model and compare it to the empirical distribution. Is it a good fit? Why might you want to use the gamma-Poisson model over the zero-inflated model? Why might you prefer the zero-inflated over the gamma-Poisson?</p></li>
 </ol></li>
 </ol>
 </body>
