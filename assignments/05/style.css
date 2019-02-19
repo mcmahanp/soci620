@@ -263,6 +263,9 @@ table.lecturetable td.llab:before {
 }
 
 /* source code */
+.sourceCode {
+    white-space: pre-wrap;
+}
 
 code.sourceCode {
     font-family: Monaco, monospace;
