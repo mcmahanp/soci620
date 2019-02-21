@@ -91,7 +91,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The data for this assignment online, and can be loaded using</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">d &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;https://mcmahanp.github.io/soci620/data/student_connectedness.csv&#39;</span>)</a></code></pre></div>
 <p>The outcome variable is called <code>part_of_school</code>, and is coded as with integers representing the five categories. A value of 1 means “strongly disagree” and a value of 5 means “strongly agree”. The data also contains variables on the students’ responses to the other connectedness questions, all using the same scale.</p></li>
-<li><p><strong>Build a multinomial logit model of days skipped. (<em>7 points</em>)</strong></p>
+<li><p><strong>Build a multinomial logit model of belonging. (<em>7 points</em>)</strong></p>
 <p>First, build a model that <em>ignores the ordering of the values in the outcome variable</em>, treating each response to <code>part_of_school</code> (1 through 5) as a distinct category. (You will build an ordered logit in the next question.)</p>
 <ol class="incremental" type="a">
 <li><p>Often, feeling of membership in a community are contingent on both individual characteristics and perceptions of the way the community treats others. In this question you will be incorporating the variable <code>school_feels_safe</code> as a measure of students’ perception of a hostile school community. The variable uses the same Likert scale of agreement, now with the prompt “<em>You feel safe in your school.</em>”</p>
