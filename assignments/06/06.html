@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Assignment 6, SOCI 620, Winter 2019</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Assignment 6, SOCI 620, Winter 2019</h1>
+</header>
+<p><em>Due Wed, Feb 27</em></p>
+<p>This assignment will again use Add Health data this time examining students’ feelings of connectedness to their school. In a series of questions relating to the way students felt about their school as an institution and the students and teachers there, they were asked how much they agreed or disagreed with the statement “<em>You feel like you are part of your school.</em>” They were given a five-point Likert scale for the question, coded as <em>(1) Strongly disagree</em>, <em>(2) Disagree</em>, <em>(3) Neither agree nor disagree</em>, <em>(4) Agree</em>, and <em>(5) Strongly agree</em>. You will be building a series of models that investigate how student feelings of belonging are tied to their race and perceptions of safety at the school.</p>
+<p><em>General note: you again do not need to go into as much detail justifying your priors for this assignment as you did for previous assignments. Unless your priors are significantly informative, simply describing them will be enough.</em></p>
+<ol class="incremental" start="0" type="1">
+<li><p><strong>Load the data.</strong></p>
+<p>The data for this assignment online, and can be loaded using</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">d &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;https://mcmahanp.github.io/soci620/data/student_connectedness.csv&#39;</span>)</a></code></pre></div>
+<p>The outcome variable is called <code>part_of_school</code>, and is coded as with integers representing the five categories. A value of 1 means “strongly disagree” and a value of 5 means “strongly agree”. The data also contains variables on the students’ responses to the other connectedness questions, all using the same scale.</p></li>
+<li><p><strong>Build a multinomial logit model of days skipped. (<em>7 points</em>)</strong></p>
+<p>First, build a model that <em>ignores the ordering of the values in the outcome variable</em>, treating each response to <code>part_of_school</code> (1 through 5) as a distinct category. (You will build an ordered logit in the next question.)</p>
+<ol class="incremental" type="a">
+<li><p>Often, feeling of membership in a community are contingent on both individual characteristics and perceptions of the way the community treats others. In this question you will be incorporating the variable <code>school_feels_safe</code> as a measure of students’ perception of a hostile school community. The variable uses the same Likert scale of agreement, now with the prompt “<em>You feel safe in your school.</em>”</p>
+<p>For the purposes of this assignment, we will be treating <code>school_feels_safe</code> as a ratio-scale variable. There are ways to be more sophisticated about including ordinal variables as predictors (see the textbook), but for now a simpler modeling strategy will work. However, the variable will be easier to interpret if you center it. Create a new variable that centers <code>school_feels_safe</code> at its middle value of 3. The resulting variable should have a value of 0 represent “neither agree nor disagree”, while -2 and 2 represent “strongly disagree” and “strongly agree”, respectively.</p></li>
+<li><p>Use the <code>dcategorical</code> distribution function with the <code>softmax</code> link function to make a model that predicts categories of <code>part_of_school</code> based on the degree to which the student feels safe at school. Describe your model, including the meaning of the coefficients and which of the five categories you are using as reference.</p></li>
+<li><p>Estimate your model using either <code>map()</code> or <code>map2stan()</code>. What do the estimates tell you about the relationship between feelings of safety and feelings of belonging among the students (be specific)?</p></li>
+<li><p>What are the consequences of using this model rather than an ordered logit model? What are the drawbacks (if any) and what are the benefits (if any)?</p></li>
+</ol></li>
+<li><p><strong>Build an ordered logit model. (<em>6 points</em>)</strong></p>
+<p>Survey responses that use a Likert scale like <code>part_of_school</code> are very frequently modeled using an ordered logit.</p>
+<ol class="incremental" type="a">
+<li><p>Use the <code>dordlogit()</code> function to create a new model predicting <code>part_of_school</code> with your centered version of <code>school_feels_safe</code> as a covariate. Describe the parts of the model. What does <code>dordlogit()</code> represent in the model? What are the coefficients and what role do they play in the model?</p></li>
+<li><p>Estimate this new model using either <code>map()</code> or <code>map2stan()</code>. What do these estimates tell you about the relationship between feelings of safety and feelings of belonging among the students (be specific)?</p></li>
+<li><p>Compare your results to the results from the multinomial logit in the last question. Do they tell substantively similar stories? Why might you prefer the ordered logit over the multinomial logit?</p></li>
+</ol></li>
+<li><p><strong>Incorporate feelings of safety. (<em>7 points</em>)</strong></p>
+<p>Feelings of safety among students may be tied to race in important ways. For instance, marginalized groups may feel more threatened on a regular basis, which may exacerbate feelings of exclusion from a community. In this question you will incorporate race into the model.</p>
+<p>(Unfortunately, the public-use Add Health data does not allow us to account for the racial composition of the school. It is very plausible that feelings of belonging depend on the interaction of a student’s race with the degree to which their race is represented at the school.)</p>
+<ol class="incremental" type="a">
+<li><p>Add a coefficient for <code>race_white</code> into the ordered logit model from the previous question and estimate the model using <code>map()</code> or <code>map2stan()</code>. Interpret the coefficient estimates, stating specifically what they mean in terms of our expectations about student attitudes.</p></li>
+<li><p>Create one last model that includes an interaction term between <code>race_white</code> and your centered version of <code>school_feels_safe</code> and estimate it in R. Do the non-interacted coefficients change? What does the coefficient on the interaction tell us?</p></li>
+<li><p>Use the results from this last model to describe how white and non-white students react differently to perceptions of school safety. (A well chosen figure might be appropriate here, but is not required.)</p></li>
+</ol></li>
+</ol>
+</body>
+</html>

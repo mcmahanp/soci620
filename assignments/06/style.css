@@ -1,0 +1,288 @@
+
+/* overall styling */
+body {
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-weight: 300;
+   width: 80%;
+   max-width: 700px;
+   min-width: 300px;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+body > p {
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-align: justify; 
+}
+
+body > h1 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+body > h2 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+body > h3 {
+    margin-top: 10;
+    margin-bottom: 10px;
+}
+body > h4 {
+    margin-top: 10;
+    margin-bottom: 10px;
+}
+
+p>code{
+    background-color: #EEE;
+}
+
+strong{
+    font-weight: 500;
+}
+
+a {
+    text-decoration: underline dotted #AAA;
+    /*text-decoration: none;*/
+    color: black;
+    /*background-color: #f2f2f2aa;*/
+}
+a:hover {
+    color: #fff;
+    background-color: black;
+}
+a:after {
+    content: "";
+    display: inline-block;
+    background: url("external-link.png") no-repeat bottom left;
+    width: 7pt;
+    height: 12pt;
+    margin-left: 2px;
+}
+
+ul {
+    margin-left: 0px;
+}
+ul >li {
+    padding-bottom: 5px;
+}
+
+/* Style top-level lists */
+/* from https://www.456bereastreet.com/archive/201105/styling_ordered_list_numbers/ */
+body > ol {
+    counter-reset:li; /* Initiate a counter */
+    margin-left:30px; /* Remove the default left margin */
+    padding-left:0; /* Remove the default left padding */
+}
+body > ol[start="0"]{
+    counter-reset:li -1;
+}
+body > ol > li {
+    position:relative; /* Create a positioning context */
+    /*margin:0 0 6px 2em; /* Give each list item a left margin to make room for the numbers */
+    list-style:none; /* Disable the normal item numbering */
+
+    margin-bottom: 30px;
+    border-left: 3px solid black;
+    padding-left: 8px;
+}
+body > ol > li:before {
+    content:counter(li); /* Use the counter as content */
+    counter-increment:li; /* Increment the counter by 1 */
+    /* Position and style the number */
+    position:absolute;
+    top:-8px;
+    left:-38px;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    width:30px;
+    /* Some space between the number and the content in browsers that support
+       generated content but not positioning it (Camino 2 is one example) */
+    margin-right:8px;
+    padding:0px;
+    font-weight:bold;
+    font-size: 200%;
+    text-align:right;
+}
+
+
+
+/* generic table */
+table {
+    margin-left: 30px;
+    border-collapse: collapse;
+    text-align: right;
+}
+table tr{
+    border-bottom: 1.5px solid black;
+    vertical-align: bottom;
+}
+table td, table th {
+    padding-left: 30px;
+    padding-top: 5px;
+}
+table td:first-child, table th:first-child{
+    padding-left: 0px;
+    text-align: right;
+}
+
+
+
+/* personnel table */
+table#personnel {
+    margin-left: 30px;
+    border-collapse: collapse;
+}
+table#personnel tr{
+    border-bottom: 2px solid black;
+    vertical-align: bottom;
+}
+table#personnel td:first-child{
+    padding-right: 5px;
+    text-align: right;
+    font-weight: 500;
+    font-size: 110%;
+}
+
+/* grading table */
+table#grading {
+    margin-left: 30px;
+    border-collapse: collapse;
+    text-align: right;
+}
+table#grading tr{
+    border-bottom: 2px solid black;
+    vertical-align: bottom;
+}
+table#grading td {
+    padding-left: 30px;
+}
+table#grading td:first-child{
+    padding-left: 0px;
+    text-align: right;
+    font-weight: 500;
+}
+table#grading td:last-child{
+    font-weight: bolder;
+}
+
+
+
+
+/* schedule table */
+table#schedule_table {
+  border-collapse: collapse;
+  width:85%;
+  min-width: 500px;
+  margin-left:	30px;
+  margin-right: auto;
+}
+
+table#schedule_table tr {
+    border-bottom: 3px solid black !important;
+    vertical-align: bottom;
+}
+table#schedule_table p {
+	margin: 0;
+	margin-top: 10px;
+}
+table#schedule_table ul {
+	margin: 0;
+}
+
+table#schedule_table td {
+	position: relative;
+	text-align: right;
+	line-height: .85;
+	padding-right: 0;
+	padding-left: 3em;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+table#schedule_table td:first-child {
+	padding-left:0;
+	font-weight: bold;
+}
+
+td.weeknum {
+    font-size: 180%;
+    white-space: nowrap;
+}
+
+table#schedule_table p { /*mainly readings*/
+    font-size: 85%;
+    text-align: left;
+}
+table#schedule_table p strong { /*mainly readings*/
+    font-weight: bold;
+}
+/* lecture sub-tabled */
+table.lecturetable {
+    width: 100%;
+    border-spacing: 0;
+    padding-bottom: 0px !important;
+    padding-top: 3px !important;
+    margin-top: 3px;
+    border-collapse: initial;
+}
+
+table.lecturetable td {
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+}
+
+table.lecturetable tr td {
+    border-top: 2px solid black;
+}
+table.lecturetable tr:first-child td {
+    border-top: 0px;
+}
+
+table.lecturetable td.lday {
+    width: 20px;
+    white-space: nowrap;
+}
+table.lecturetable td.ldate {
+    text-align: left !important;
+    width: auto;
+    white-space: nowrap;
+    padding-right: 8px !important;
+    font-style: italic;
+}
+table.lecturetable td.llab {
+    text-align: left !important;
+    padding-left: 1em !important;
+}
+
+table.lecturetable td.llab:before {
+    content: "code:";
+    font-weight: bold;
+}
+
+/* source code */
+
+code.sourceCode {
+    font-family: Monaco, monospace;
+    font-size: 85%;
+}
+div.sourceCode {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+div.sourceCode a:after {
+    content: "";
+    display: inline-block;
+    background: none;
+    width: 7pt;
+    height: 12pt;
+    margin-left: 2px;
+}
+
+
+/* reference list */
+div.references {
+    margin-left:30px;
+}
