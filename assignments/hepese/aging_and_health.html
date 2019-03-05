@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Final project prepared topic, SOCI 620, Winter 2019</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Final project prepared topic, SOCI 620, Winter 2019</h1>
+</header>
+<p>For the final project, you will analyze data from Wave I of the <a href="http://www.columbia.edu/acis/eds/data_search/1798-9301.html">Hispanic Established Populations for the Epidemiological Studies of the Elderly (Hispanic EPESE)</a> study. The Hispanic EPESE was a federally funded study in the United States concerned with the health and wellbeing of aging Latino and Hispanic people. Wave I was completed in 1993, and includes respondents from five U.S. states: Arizona, California, Colorado, New Mexico, and Texas.</p>
+<p>A selection of variables from the complete dataset to use for your analysis can be downloaded from <a href="https://mcmahanp.github.io/soci620/assignments/hepese/hepese.csv" class="uri">https://mcmahanp.github.io/soci620/assignments/hepese/hepese.csv</a>. A description of the variables included in the selection can be found in the table at the end of this document.</p>
+<p>Your analysis should aim to explain the patterns or variation in <strong>one of two</strong> of the included variables:</p>
+<ol type="1">
+<li>The first option is to try to explain differences in regular utilization of health care among respondents. Why do some older Hispanic and Latino residents visit the doctor very frequently while others do so rarely or not at all? Your primary outcome (dependent) variable for this analysis should be <code>doctor_visit</code>, a count of visits to the doctor over the past 12 months.</li>
+<li>The second option is to examine predictors for depression among study respondents. What physical, social, and cultural factors can be used to explain differences in rates of depression among older Hispanics and Latinos? If you choose this option, you should use the variable <code>depression_cesd16</code> as the outcome (dependent) variable in your analyses. (See below for a description of how this variable was constructed.)</li>
+</ol>
+<p>Regardless of which option you choose, your analysis should include a few elements:</p>
+<p><strong>First</strong>, you should utilize a multi-level approach. The data contains the county and state of residence for respondents, as well as county-level population. Your analysis should specifically address variation in patterns across the different counties in the sample.</p>
+<p><strong>Second</strong>, you should formally compare at least two reasonable model specifications, arguing why one might prefer one over another.</p>
+<p><strong>Third</strong>, you should carefully justify the models you prepare, including the inclusion of covariates, variable interactions, transformations and constructed variables, and overall model structure (outcome distribution, link function, random and fixed effects). Does your model offer evidence of causal relationships between the variables, or is it just descriptive? Have you accounted for confounding, mediation, and moderation?</p>
+<p>Overall, the analysis and presentation should make a coherent and convincing argument about the nature of the outcome variable you are trying to explain and the ways it varies across sample respondents.</p>
+<h2 id="description-of-variables">Description of variables</h2>
+<table class="var_description">
+<tr>
+<td>
+resp_id
+</td>
+<td>
+Unique identifier assigned to each respondent.
+</td>
+</tr>
+<tr>
+<td>
+resp_weight
+</td>
+<td>
+Sampling weight for each respondent (<em>note: we did not cover sampling weights in the course, so you can ignore these values in your analysis</em>).
+</td>
+</tr>
+<tr>
+<td>
+interview_lang
+</td>
+<td>
+Language of interview (English or Spanish).
+</td>
+</tr>
+<tr>
+<td>
+age
+</td>
+<td>
+Respondent age in years.
+</td>
+</tr>
+<tr>
+<td>
+sex
+</td>
+<td>
+Respondent sex.
+</td>
+</tr>
+<tr>
+<td>
+county
+</td>
+<td>
+County of residence.
+</td>
+</tr>
+<tr>
+<td>
+state
+</td>
+<td>
+State of residence.
+</td>
+</tr>
+<tr>
+<td>
+county_state
+</td>
+<td>
+County and state of residence (some counties in different states have the same name).
+</td>
+</tr>
+<tr>
+<td>
+county_pop
+</td>
+<td>
+Total population in county of residence, 1990 Census estimate.
+</td>
+</tr>
+<tr>
+<td>
+born_usa
+</td>
+<td>
+Was respondent born in the United States (indicator)?
+</td>
+</tr>
+<tr>
+<td>
+marital_status
+</td>
+<td>
+“Are you married, separated, divorced, widowed, or never married?”
+</td>
+</tr>
+<tr>
+<td>
+educ_grade
+</td>
+<td>
+Highest grade of school completed (0 for no school).
+</td>
+</tr>
+<tr>
+<td>
+hh_size
+</td>
+<td>
+“How many people live in this household?”
+</td>
+</tr>
+<tr>
+<td>
+years_at_address
+</td>
+<td>
+Number of years living at current address.
+</td>
+</tr>
+<tr>
+<td>
+num_children
+</td>
+<td>
+“How many living sons and daughters (including adopted, foster or step-children) do you have?”
+</td>
+</tr>
+<tr>
+<td>
+soc_support_trouble
+</td>
+<td>
+“In times of trouble, can you count on at least some of your family or friends most of the time, some of the time, or hardly ever?”
+</td>
+</tr>
+<tr>
+<td>
+soc_support_problems
+</td>
+<td>
+“Can you talk about your deepest problems with at least some of your family or friends most of the time, some of the time, or hardly ever?”
+</td>
+</tr>
+<tr>
+<td>
+employment
+</td>
+<td>
+Respondent’s employment status.
+</td>
+</tr>
+<tr>
+<td>
+eng_prof
+</td>
+<td>
+English proficiency, constructed from self-reported ability in speaking, reading, and understanding English.
+</td>
+</tr>
+<tr>
+<td>
+overall_health
+</td>
+<td>
+“Overall, how would you rate your health?”
+</td>
+</tr>
+<tr>
+<td>
+depression_cesd16
+</td>
+<td>
+Did respondent score at least 16 on the <a href="https://en.wikipedia.org/wiki/Center_for_Epidemiologic_Studies_Depression_Scale">Center for Epidemiologic Studies depression scale</a> (CES-D)? This cutoff is meant to indicate that the respondent is at risk of experiencing depression.
+</td>
+</tr>
+<tr>
+<td>
+iadl_total
+</td>
+<td>
+Number of <a href="https://en.wikipedia.org/wiki/Activities_of_daily_living#Instrumental"><em>instrumental</em> activities of daily living</a> (e.g. using the telephone, driving a car, or going shopping) with which the respondent needs help from another person (out of 10 total items).
+</td>
+</tr>
+<tr>
+<td>
+adl_total
+</td>
+<td>
+Number of <a href="https://en.wikipedia.org/wiki/Activities_of_daily_living#Basic"><em>basic</em> activities of daily living</a> (e.g. getting dressed, eating, or walking across a small room) with which the respondent needs help from another person (out of 7 total items).
+</td>
+</tr>
+<tr>
+<td>
+mobility_poma
+</td>
+<td>
+Summary score on the <a href="https://en.wikipedia.org/wiki/Tinetti_test">Performance Oriented Mobility Assessment (POMA) test</a>. This test is intended to measure the respondent’s balance and general mobility. Higher scores indicate better mobility (a score of 0 means they were unable to complete the test).
+</td>
+</tr>
+<tr>
+<td>
+doctor_visit
+</td>
+<td>
+Number of visits to a doctor in the past 12 months.
+</td>
+</tr>
+<tr>
+<td>
+doctor_satisfaction
+</td>
+<td>
+Overall respondent satisfaction with medical care they receive.
+</td>
+</tr>
+<tr>
+<td>
+hospital
+</td>
+<td>
+“Did you experience an illness or injury (get sick or get hurt) that required staying overnight or longer in a hospital (not a nursing home) [in the past 12 months]?”
+</td>
+</tr>
+<tr>
+<td>
+partner_hospital
+</td>
+<td>
+“Was your husband/wife hospitalized [in the past 12 months]?”
+</td>
+</tr>
+<tr>
+<td>
+disrupt_illness
+</td>
+<td>
+“Did you experience an illness or injury (get sick or hurt) that kept you from your usual activities (work, housework) for a week or more [in the past 12 months]?”
+</td>
+</tr>
+<tr>
+<td>
+close_die
+</td>
+<td>
+“Did anyone close to you die [in the past 12 months]?”
+</td>
+</tr>
+<tr>
+<td>
+close_ill
+</td>
+<td>
+“Did a close family member or friend experience a serious illness or injury [in the past 12 months]?”
+</td>
+</tr>
+<tr>
+<td>
+finance_worse
+</td>
+<td>
+“Did your financial situation get considerably worse [in the past 12 months]?”
+</td>
+</tr>
+<tr>
+<td>
+take_care
+</td>
+<td>
+“Did you have to assume responsibility for taking regular care of someone else [in the past 12 months]?”
+</td>
+</tr>
+<tr>
+<td>
+victim
+</td>
+<td>
+“Were you the victim of a crime [in the past 12 months]?”
+</td>
+</tr>
+<tr>
+<td>
+religion
+</td>
+<td>
+Respondent’s religious preference.
+</td>
+</tr>
+<tr>
+<td>
+religion_freq
+</td>
+<td>
+Frequency of attending religious services.
+</td>
+</tr>
+<tr>
+<td>
+nonrelig_group
+</td>
+<td>
+“Do you participate regularly in any non-religious groups such as a senior center, a political org. or any other social/recreational group?”
+</td>
+</tr>
+<tr>
+<td>
+hh_income
+</td>
+<td>
+Yearly household income from past year, measured categories.
+</td>
+</tr>
+<tr>
+<td>
+medicare
+</td>
+<td>
+Is the respondent covered by <a href="https://en.wikipedia.org/wiki/Medicare_(United_States)">Medicare</a> (public medical insurance for people aged at least 65 years)?
+</td>
+</tr>
+<tr>
+<td>
+medicaid
+</td>
+<td>
+Is the respondent covered by <a href="https://en.wikipedia.org/wiki/Medicaid">Medicaid</a> (public medical insurance for people with low income, generally covers more costs than Medicare)?
+</td>
+</tr>
+<tr>
+<td>
+health_insurance
+</td>
+<td>
+Is the respondent covered by some other medical insurance?
+</td>
+</tr>
+</table>
+</body>
+</html>
